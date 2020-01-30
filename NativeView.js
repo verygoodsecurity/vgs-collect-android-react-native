@@ -8,13 +8,13 @@ const propTypes = {
 };
 
 const NativeView = ({ someRandomProp }) => (
-    <VideoView
+    <VGSEditText
         style={{ flex: 1 }}
         someRandomProp={someRandomProp}
     />
 );
 
 NativeView.propTypes = propTypes;
-const VideoView = requireNativeComponent('VGSEditText', NativeView);
+const VGSEditText = requireNativeComponent('VGSEditText', NativeView);
 
 export default NativeView;
