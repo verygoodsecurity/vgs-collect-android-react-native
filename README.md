@@ -32,10 +32,10 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 ```
 
 ### Running the project
-- pull project from repository.
-- Open a macOS Terminal and go to the project directory(`./Awesome_Project`).
-- if this is first start - run ``npm install`` command.
-- run `restart.sh` script to clear cache and build project on emulator.
+- `git clone git@github.com:verygoodsecurity/vgs-collect-android-react-native.git`
+- Open a Terminal and go to the project directory(`./vgs-collect-android-react-native`).
+- If this is first start - run ``npm install`` command.
+- Run `restart.sh` script to clear cache and build project on emulator.
 
 **Note:** Please, don't forget to change ``<vault_id>`` to your read ID [here](https://github.com/verygoodsecurity/vgs-collect-android-react-native/blob/master/android/app/src/main/java/com/awesome_project/collect/VGSCollectModule.java) from [VGS Dashboard](https://dashboard.verygoodsecurity.com/dashboard/).
 
