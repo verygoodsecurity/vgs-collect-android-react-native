@@ -65,54 +65,39 @@ constructor(props) {
         return (
         <>
             <View style={{flex: 1,flexDirection: 'row'}}>
-                  <View style={{
-                    flex: 3,
-                    justifyContent: 'flex-start',
-                    flexDirection: 'column',
-                    alignItems: 'stretch',
-                    padding:16,
-                  }}>
+                <View style={styles.bodyContent }>
+                    <View style={styles.container} >
+                        <CardNumberLayout style={styles.field} />
+                    </View>
+                    <View style={styles.container} >
+                        <CardHolderLayout style={styles.field} />
+                    </View>
+                    <View style={styles.container} >
+                        <CardCVCLayout style={styles.field} />
+                    </View>
+                    <View style={styles.container} >
+                        <Button style={styles.button}
+                            title="Submit"
+                            onPress={() => VGSCollect.submitAsync()}
+                        />
+                    </View>
+                    <View style={styles.container} >
+                        <Button style={styles.button}
+                            title="Scan"
+                            onPress={this.handleClick}
+                        />
+                    </View>
 
-                <View style={{height: 60 }} >
-                    <CardNumberLayout style={{height: 50, backgroundColor: 'powderblue'}} />
                 </View>
-                <View style={{height: 60 }} >
-                    <CardHolderLayout style={{height: 50, backgroundColor: 'skyblue'}} />
-                </View>
-                <View style={{height: 60 }} >
-                    <CardCVCLayout style={{height: 50, backgroundColor: 'skyblue'}} />
-                </View>
-
-                <View style={{height: 60 }} >
-                    <Button
-                        style={styles.button}
-                        title="Submit"
-                        onPress={() => VGSCollect.submitAsync()}
-                    />
-                </View>
-
-                <View style={{height: 60 }} >
-                    <Button
-                        style={styles.button}
-                        title="Scan"
-                        onPress={this.handleClick}
-                    />
-                </View>
-
-              </View>
-              <View style={{
-                  flex: 2,
-                  flexDirection: 'column',
-                  marginTop:25,
-                }}>
-                    <Text style={{fontWeight: 'bold'}}>
-                           {this.state.titleText}
-                     </Text>
+                <View style={styles.bodyResponse }>
+                    <Text style={styles.responseTitle}>
+                        {this.state.titleText}
+                    </Text>
                     <Text style={styles.titleText}
                         onPress={this.onPressTitle}
                         onChangeText = {this.showUserData}>
                        {this.state.bodyText}
-                     </Text>
+                    </Text>
                 </View>
             </View>
         </>
@@ -121,16 +106,29 @@ constructor(props) {
 };
 
 const styles = StyleSheet.create({
-  body: {
-    padding:16,
-    flex:1,
-    flexDirection: 'row',
-        flexDirection: 'column',
-        alignItems: 'stretch',
+  bodyContent: {
+      flex: 3,
+      justifyContent: 'flex-start',
+      flexDirection: 'column',
+      alignItems: 'stretch',
+      padding:16,
+  },
+
+  bodyResponse: {
+      flex: 2,
+      flexDirection: 'column',
+      marginTop:25,
+  },
+  container: {
+    height: 60,
   },
 
   field: {
-    height: 10,
+    height: 50,
+  },
+
+  responseTitle: {
+    fontWeight: 'bold',
   },
   button: {
     marginTop:50,

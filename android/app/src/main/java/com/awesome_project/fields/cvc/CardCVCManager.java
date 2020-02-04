@@ -45,6 +45,7 @@ public class CardCVCManager extends ViewGroupManager<VGSTextInputLayout> {
         vgsTextInputLayout.setHint("CVC");
 
         editText = new VGSEditText(reactContext);
+        editText.setIsRequired(true);
         editText.setFieldName(FIELD_NAME);
         editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
         editText.setFieldType(FieldType.CVC);

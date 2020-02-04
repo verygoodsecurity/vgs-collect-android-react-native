@@ -46,6 +46,7 @@ public class CardNumberManager extends ViewGroupManager<VGSTextInputLayout> {
 
          editText = new VGSCardNumberEditText(reactContext);
         editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
+        editText.setIsRequired(true);
         editText.setCardBrandIconGravity(Gravity.END);
         editText.setFieldName(FIELD_NAME);
         editText.setFieldType(FieldType.CARD_NUMBER);

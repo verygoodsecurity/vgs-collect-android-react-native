@@ -46,6 +46,7 @@ public class CardHolderManager extends ViewGroupManager<VGSTextInputLayout> {
 
         editText = new VGSEditText(reactContext);
         editText.setFieldName(FIELD_NAME);
+        editText.setIsRequired(true);
         editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
         editText.setFieldType(FieldType.CARD_HOLDER_NAME);
 
