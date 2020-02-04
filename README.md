@@ -1,6 +1,6 @@
 
 ### Development
-- Development domain: https://facebook.github.io/react-native/docs/getting-started
+Development domain: https://facebook.github.io/react-native/docs/getting-started
 
 ### Installing dependencies
 
@@ -36,6 +36,8 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 - Open a macOS Terminal and go to the project directory(`./Awesome_Project`).
 - if this is first start - run ``npm install`` command.
 - run `restart.sh` script to clear cache and build project on emulator.
+
+**Note:** Please, don't forget to change ``<vault_id>`` to your read ID [here](https://github.com/verygoodsecurity/vgs-collect-android-react-native/blob/master/android/app/src/main/java/com/awesome_project/collect/VGSCollectModule.java) from [VGS Dashboard](https://dashboard.verygoodsecurity.com/dashboard/).
 
 
 
