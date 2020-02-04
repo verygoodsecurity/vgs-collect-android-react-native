@@ -180,7 +180,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'com.verygoodsecurity:vgscollect:1.0.1'
+    implementation 'com.verygoodsecurity:vgscollect:1.0.2'
+    implementation 'io.card:android-sdk:5.5.1'
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation "com.facebook.react:react-native:+"  // From node_modules
 

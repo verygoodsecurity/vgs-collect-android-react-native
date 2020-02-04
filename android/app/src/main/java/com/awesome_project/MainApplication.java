@@ -13,16 +13,19 @@ import java.util.List;
 import java.util.Arrays;
 import android.app.Activity;
 import com.awesome_project.collect.VGSCollectPackage;
-import com.awesome_project.number.CardNumberPackage;
-import com.awesome_project.number.OnCreateViewInstanceListener;
+import com.awesome_project.fields.holder.CardHolderPackage;
+import com.awesome_project.fields.cvc.CardCVCPackage;
+import com.awesome_project.fields.number.CardNumberPackage;
+import com.awesome_project.fields.OnCreateViewInstanceListener;
 import android.util.Log;
+import com.awesome_project.scanner.ScanPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
-  private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+    private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
         @Override
         public boolean getUseDeveloperSupport() {
-          return BuildConfig.DEBUG;
+            return BuildConfig.DEBUG;
         }
 
         @Override
@@ -31,55 +34,55 @@ public class MainApplication extends Application implements ReactApplication {
             VGSCollectPackage collect = new VGSCollectPackage();
             OnCreateViewInstanceListener listener = collect.getListener();
             CardNumberPackage number = new CardNumberPackage(listener);
+            CardHolderPackage holder = new CardHolderPackage(listener);
+            CardCVCPackage cvc = new CardCVCPackage(listener);
 
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
+                    new ScanPackage(),
                     number,
+                    holder,
+                    cvc,
                     collect
             );
         }
 
         @Override
         protected String getJSMainModuleName() {
-          return "index";
+            return "index";
         }
-      };
+    };
 
-  @Override
-  public ReactNativeHost getReactNativeHost() {
-    return mReactNativeHost;
-  }
+    @Override
+    public ReactNativeHost getReactNativeHost() {
+        return mReactNativeHost;
+    }
 
-  @Override
-  public void onCreate() {
-    super.onCreate();
-    SoLoader.init(this, /* native exopackage */ false);
-    initializeFlipper(this); // Remove this line if you don't want Flipper enabled
-  }
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        SoLoader.init(this, /* native exopackage */ false);
+        initializeFlipper(this); // Remove this line if you don't want Flipper enabled
+    }
 
-  /**
-   * Loads Flipper in React Native templates.
-   *
-   * @param context
-   */
-  private static void initializeFlipper(Context context) {
-    if (BuildConfig.DEBUG) {
-      try {
+    private static void initializeFlipper(Context context) {
+        if (BuildConfig.DEBUG) {
+            try {
         /*
          We use reflection here to pick up the class that initializes Flipper,
         since Flipper library is not available in release mode
         */
-        Class<?> aClass = Class.forName("com.facebook.flipper.ReactNativeFlipper");
-        aClass.getMethod("initializeFlipper", Context.class).invoke(null, context);
-      } catch (ClassNotFoundException e) {
-        e.printStackTrace();
-      } catch (NoSuchMethodException e) {
-        e.printStackTrace();
-      } catch (IllegalAccessException e) {
-        e.printStackTrace();
-      } catch (InvocationTargetException e) {
-        e.printStackTrace();
-      }
+                Class<?> aClass = Class.forName("com.facebook.flipper.ReactNativeFlipper");
+                aClass.getMethod("initializeFlipper", Context.class).invoke(null, context);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
     }
-  }
 }

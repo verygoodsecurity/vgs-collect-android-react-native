@@ -12,7 +12,7 @@ import java.util.Arrays;
 import android.widget.Toast;
 import android.app.Activity;
 import android.util.Log;
-import com.awesome_project.number.OnCreateViewInstanceListener;
+import com.awesome_project.fields.OnCreateViewInstanceListener;
 import com.verygoodsecurity.vgscollect.view.InputFieldView;
 
 public class VGSCollectPackage implements ReactPackage, OnCreateViewInstanceListener {
@@ -21,6 +21,10 @@ public class VGSCollectPackage implements ReactPackage, OnCreateViewInstanceList
 
   public OnCreateViewInstanceListener getListener() {
     return this;
+  }
+
+  public VGSCollectModule getVGSCollectModule() {
+    return module;
   }
 
   @Override
