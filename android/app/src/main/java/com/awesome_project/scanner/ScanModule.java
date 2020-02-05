@@ -7,7 +7,7 @@ import com.verygoodsecurity.vgscollect.app.BaseTransmitActivity;
 
 import java.util.HashMap;
 import java.util.Map;
-import com.awesome_project.ScanActivity;
+import com.verygoodsecurity.api.cardio.ScanActivity;
 
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
