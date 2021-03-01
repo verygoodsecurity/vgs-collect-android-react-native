@@ -1,6 +1,6 @@
 ## VGS Collect SDK - React Native Demo
 
-> **_NOTE:_**  VGS does not support React Native. This demo is just an example of how VGS Collect SDK can be integrated into your application. 
+> **_NOTE:_**  This demo is just an example of how VGS Collect SDK can be integrated into your application. 
 
 ## How to run it?
 
