@@ -42,7 +42,7 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 - Run `restart.sh` script to clear cache and build project on emulator.
 - Make sure you have ``assets`` folder created here ``/android/app/src/main/assets``
 
-**Note:** Please, don't forget to change ``<vault_id>`` to your read ID [here](https://github.com/verygoodsecurity/vgs-collect-android-react-native/blob/master/android/app/src/main/java/com/awesome_project/collect/VGSCollectModule.java) from [VGS Dashboard](https://dashboard.verygoodsecurity.com/dashboard/).
+**Note:** Please, don't forget to change ``<vault_id>`` to your read ID [here](https://github.com/verygoodsecurity/vgs-collect-android-react-native/blob/master/android/app/src/main/java/com/awesome_project/collect/VGSCollectModule.java#L47) from [VGS Dashboard](https://dashboard.verygoodsecurity.com/dashboard/).
 
 
 
