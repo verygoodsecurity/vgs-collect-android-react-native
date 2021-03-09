@@ -1,4 +1,4 @@
-package com.awesome_project.fields.cvc;
+package com.awesome_project.fields.date;
 
 import android.net.Uri;
 import android.widget.Toast;
@@ -10,51 +10,53 @@ import android.util.TypedValue;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.uimanager.IllegalViewOperationException;
-import com.verygoodsecurity.vgscollect.widget.VGSCardNumberEditText;
-import com.verygoodsecurity.vgscollect.widget.CardVerificationCodeEditText;
+import com.verygoodsecurity.vgscollect.widget.ExpirationDateEditText;
 import com.verygoodsecurity.vgscollect.widget.VGSTextInputLayout;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
+import com.verygoodsecurity.vgscollect.view.date.DatePickerMode;
 import com.awesome_project.fields.OnCreateViewInstanceListener;
 import com.verygoodsecurity.vgscollect.view.card.FieldType;
 
-public class CardCVCManager extends ViewGroupManager<VGSTextInputLayout> {
-    public static final String FIELD_NAME = "cvc";
-    private CardVerificationCodeEditText editText;
+public class CardExpDateManager extends ViewGroupManager<VGSTextInputLayout> {
+    public static final String FIELD_NAME = "expDate";
+    private ExpirationDateEditText editText;
     private VGSTextInputLayout vgsTextInputLayout;
 
     private OnCreateViewInstanceListener listener;
 
-    CardCVCManager(OnCreateViewInstanceListener listener) {
+    CardExpDateManager(OnCreateViewInstanceListener listener) {
         super();
         this.listener = listener;
     }
 
     @Override
     public String getName() {
-        return "CardCVCLayout";
+        return "CardExpDateLayout";
     }
 
     @Override
     protected VGSTextInputLayout createViewInstance(ThemedReactContext reactContext) {
         createVGSTextInputLayout(reactContext);
-        createCardVerificationCodeEditText(reactContext);
+        createExpirationDateEditText(reactContext);
 
         return vgsTextInputLayout;
     }
 
     private void createVGSTextInputLayout(ThemedReactContext reactContext) {
         vgsTextInputLayout = new VGSTextInputLayout(reactContext);
-        vgsTextInputLayout.setHint("CVC");
+        vgsTextInputLayout.setHint("Exp Date");
     }
 
-    private void createCardVerificationCodeEditText(ThemedReactContext reactContext) {
-        editText = new CardVerificationCodeEditText(reactContext);
+    private void createExpirationDateEditText(ThemedReactContext reactContext) {
+        editText = new ExpirationDateEditText(reactContext);
         editText.setIsRequired(true);
         editText.setFieldName(FIELD_NAME);
         editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
+        editText.setDateRegex("MM/yy");
+        editText.setDatePickerMode(DatePickerMode.SPINNER);
 
         vgsTextInputLayout.addView(editText);
 
@@ -66,7 +68,7 @@ public class CardCVCManager extends ViewGroupManager<VGSTextInputLayout> {
         android.widget.Toast.makeText(field.getContext(), urlPath, Toast.LENGTH_SHORT).show();
     }
 
-    public CardVerificationCodeEditText getEditTextInstance() { // <-- returns the View instance
+    public ExpirationDateEditText getEditTextInstance() { // <-- returns the View instance
         return editText;
     }
 

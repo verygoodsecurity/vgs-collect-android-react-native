@@ -17,6 +17,9 @@ import NumberVGSEditText from './fields/number/EditText';
 import CardCVCLayout from './fields/cvc/NativeView';
 import CVCVGSEditText from './fields/cvc/EditText';
 
+import CardExpDateLayout from './fields/date/NativeView';
+import ExpDateVGSEditText from './fields/date/EditText';
+
 import CardHolderLayout from './fields/holder/NativeView';
 import HolderVGSEditText from './fields/holder/EditText';
 
@@ -74,6 +77,9 @@ constructor(props) {
                     </View>
                     <View style={styles.container} >
                         <CardCVCLayout style={styles.field} />
+                    </View>
+                    <View style={styles.container} >
+                        <CardExpDateLayout style={styles.field} />
                     </View>
                     <View style={styles.container} >
                         <Button style={styles.button}

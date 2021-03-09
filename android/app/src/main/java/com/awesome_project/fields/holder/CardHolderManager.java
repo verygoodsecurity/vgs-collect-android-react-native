@@ -17,13 +17,13 @@ import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
-import com.verygoodsecurity.vgscollect.widget.VGSEditText;
+import com.verygoodsecurity.vgscollect.widget.PersonNameEditText;
 import com.awesome_project.fields.OnCreateViewInstanceListener;
 import com.verygoodsecurity.vgscollect.view.card.FieldType;
 
 public class CardHolderManager extends ViewGroupManager<VGSTextInputLayout> {
     public static final String FIELD_NAME = "cardHolder";
-    private VGSEditText editText;
+    private PersonNameEditText editText;
     private VGSTextInputLayout vgsTextInputLayout;
 
     private OnCreateViewInstanceListener listener;
@@ -40,21 +40,26 @@ public class CardHolderManager extends ViewGroupManager<VGSTextInputLayout> {
 
     @Override
     protected VGSTextInputLayout createViewInstance(ThemedReactContext reactContext) {
+        createVGSTextInputLayout(reactContext);
+        createPersonNameEditText(reactContext);
 
+        return vgsTextInputLayout;
+    }
+
+    private void createVGSTextInputLayout(ThemedReactContext reactContext) {
         vgsTextInputLayout = new VGSTextInputLayout(reactContext);
         vgsTextInputLayout.setHint("card holder");
+    }
 
-        editText = new VGSEditText(reactContext);
+    private void createPersonNameEditText(ThemedReactContext reactContext) {
+        editText = new PersonNameEditText(reactContext);
         editText.setFieldName(FIELD_NAME);
         editText.setIsRequired(true);
         editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
-        editText.setFieldType(FieldType.CARD_HOLDER_NAME);
 
         vgsTextInputLayout.addView(editText);
 
         listener.onCreateViewInstance(editText);
-
-        return vgsTextInputLayout;
     }
 
     @ReactProp(name="url")
@@ -62,7 +67,7 @@ public class CardHolderManager extends ViewGroupManager<VGSTextInputLayout> {
         android.widget.Toast.makeText(field.getContext(), urlPath, Toast.LENGTH_SHORT).show();
     }
 
-    public VGSEditText getEditTextInstance() { // <-- returns the View instance
+    public PersonNameEditText getEditTextInstance() { // <-- returns the View instance
         return editText;
     }
 
