@@ -8,7 +8,6 @@ import com.facebook.react.bridge.ReactMethod;
 import android.app.Activity;
 import android.util.Log;
 import android.content.Intent;
-import android.widget.Toast;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -20,20 +19,40 @@ import com.awesome_project.fields.OnCreateViewInstanceListener;
 import com.verygoodsecurity.vgscollect.view.InputFieldView;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.verygoodsecurity.vgscollect.core.VgsCollectResponseListener;
-import com.verygoodsecurity.vgscollect.core.model.VGSResponse;
+import com.verygoodsecurity.vgscollect.core.model.network.VGSResponse;
 import com.verygoodsecurity.vgscollect.core.model.state.FieldState;
 import com.verygoodsecurity.vgscollect.core.storage.OnFieldStateChangeListener;
 
 public class VGSCollectModule extends ReactContextBaseJavaModule {
     private static ReactApplicationContext reactContext;
+    private Activity activity;
 
     private VGSCollect collect;
 
     VGSCollectModule(ReactApplicationContext c) {
         super(c);
         reactContext = c;
+    }
 
-        collect = new VGSCollect("<vault_id>", Environment.SANDBOX);
+    @Override
+    public void initialize() {
+        super.initialize();
+        activity = reactContext.getCurrentActivity();
+
+        init();
+    }
+
+    @ReactMethod
+    public void init() {
+        collect = new VGSCollect.Builder(activity, "tntpszqgikn")
+                .setEnvironment(Environment.SANDBOX)
+                .create();
+
+        initListeners();
+        addStaticHeaders();
+    }
+
+    private void initListeners() {
         collect.addOnResponseListeners(new VgsCollectResponseListener() {
             @Override
             public void onResponse( VGSResponse response) {
@@ -48,6 +67,12 @@ public class VGSCollectModule extends ReactContextBaseJavaModule {
         });
     }
 
+    private void addStaticHeaders() {
+        HashMap data = new HashMap<String, String>();
+        data.put("nonSDKValue", "some additional data");
+        collect.setCustomData(data);
+    }
+
     @Override
     public String getName() {
         return "VGSCollect";
@@ -55,16 +80,7 @@ public class VGSCollectModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void submitAsync() {
-        Activity activity = this.getReactApplicationContext().getCurrentActivity();
-
-        android.widget.Toast.makeText(reactContext, "submit data", Toast.LENGTH_SHORT).show();
-
-        collect.resetCustomData();
-        HashMap data = new HashMap<String, String>();
-        data.put("nonSDKValue", "some additional data");
-        collect.setCustomData(data);
-
-        collect.asyncSubmit(activity, "/post", HTTPMethod.POST);
+        collect.asyncSubmit("/post", HTTPMethod.POST);
     }
 
     public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
@@ -72,8 +88,6 @@ public class VGSCollectModule extends ReactContextBaseJavaModule {
     }
 
     public void bindView(InputFieldView inputFieldView) {
-        android.widget.Toast.makeText(reactContext, "bindView", Toast.LENGTH_SHORT).show();
-
         collect.bindView(inputFieldView);
     }
 
@@ -82,17 +96,9 @@ public class VGSCollectModule extends ReactContextBaseJavaModule {
         String responseStr = "onVGSResponse";
 
         if(response instanceof VGSResponse.SuccessResponse ) {
-            Map<String, String> m = ((VGSResponse.SuccessResponse)response).getResponse();
-            int c = ((VGSResponse.SuccessResponse)response).getSuccessCode();
-            StringBuilder builder = new StringBuilder("CODE: ")
-                    .append(response.getCode()).append("\n\n");
-            for (Map.Entry<String, String> entry : m.entrySet()) {
-                builder.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
-            }
-            responseStr = builder.toString();
-
+            responseStr = "Code: " + ((VGSResponse.SuccessResponse) response).getSuccessCode();;
         } else {
-            responseStr = "CODE: "+((VGSResponse.ErrorResponse)response).getErrorCode()+" \n\n "+((VGSResponse.ErrorResponse)response).getLocalizeMessage();
+            responseStr = "Code: " + response.toString();
         }
 
         this.getReactApplicationContext()
