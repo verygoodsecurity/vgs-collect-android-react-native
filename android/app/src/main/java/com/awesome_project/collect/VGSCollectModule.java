@@ -44,7 +44,7 @@ public class VGSCollectModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void init() {
-        collect = new VGSCollect.Builder(activity, "tntpszqgikn")
+        collect = new VGSCollect.Builder(activity, "<vault_id>")
                 .setEnvironment(Environment.SANDBOX)
                 .create();
 
