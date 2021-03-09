@@ -15,6 +15,7 @@ import android.app.Activity;
 import com.awesome_project.collect.VGSCollectPackage;
 import com.awesome_project.fields.holder.CardHolderPackage;
 import com.awesome_project.fields.cvc.CardCVCPackage;
+import com.awesome_project.fields.date.CardExpDatePackage;
 import com.awesome_project.fields.number.CardNumberPackage;
 import com.awesome_project.fields.OnCreateViewInstanceListener;
 import android.util.Log;
@@ -36,6 +37,7 @@ public class MainApplication extends Application implements ReactApplication {
             CardNumberPackage number = new CardNumberPackage(listener);
             CardHolderPackage holder = new CardHolderPackage(listener);
             CardCVCPackage cvc = new CardCVCPackage(listener);
+            CardExpDatePackage expDate = new CardExpDatePackage(listener);
 
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
@@ -43,6 +45,7 @@ public class MainApplication extends Application implements ReactApplication {
                     number,
                     holder,
                     cvc,
+                    expDate,
                     collect
             );
         }
@@ -62,27 +65,5 @@ public class MainApplication extends Application implements ReactApplication {
     public void onCreate() {
         super.onCreate();
         SoLoader.init(this, /* native exopackage */ false);
-        initializeFlipper(this); // Remove this line if you don't want Flipper enabled
-    }
-
-    private static void initializeFlipper(Context context) {
-        if (BuildConfig.DEBUG) {
-            try {
-        /*
-         We use reflection here to pick up the class that initializes Flipper,
-        since Flipper library is not available in release mode
-        */
-                Class<?> aClass = Class.forName("com.facebook.flipper.ReactNativeFlipper");
-                aClass.getMethod("initializeFlipper", Context.class).invoke(null, context);
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            }
-        }
     }
 }
