@@ -11,19 +11,18 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.uimanager.IllegalViewOperationException;
 import com.verygoodsecurity.vgscollect.widget.VGSCardNumberEditText;
-import com.verygoodsecurity.vgscollect.widget.VGSEditText;
+import com.verygoodsecurity.vgscollect.widget.CardVerificationCodeEditText;
 import com.verygoodsecurity.vgscollect.widget.VGSTextInputLayout;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
-import com.verygoodsecurity.vgscollect.widget.VGSEditText;
 import com.awesome_project.fields.OnCreateViewInstanceListener;
 import com.verygoodsecurity.vgscollect.view.card.FieldType;
 
 public class CardCVCManager extends ViewGroupManager<VGSTextInputLayout> {
     public static final String FIELD_NAME = "cvc";
-    private VGSEditText editText;
+    private CardVerificationCodeEditText editText;
     private VGSTextInputLayout vgsTextInputLayout;
 
     private OnCreateViewInstanceListener listener;
@@ -40,21 +39,26 @@ public class CardCVCManager extends ViewGroupManager<VGSTextInputLayout> {
 
     @Override
     protected VGSTextInputLayout createViewInstance(ThemedReactContext reactContext) {
+        createVGSTextInputLayout(reactContext);
+        createCardVerificationCodeEditText(reactContext);
 
+        return vgsTextInputLayout;
+    }
+
+    private void createVGSTextInputLayout(ThemedReactContext reactContext) {
         vgsTextInputLayout = new VGSTextInputLayout(reactContext);
         vgsTextInputLayout.setHint("CVC");
+    }
 
-        editText = new VGSEditText(reactContext);
+    private void createCardVerificationCodeEditText(ThemedReactContext reactContext) {
+        editText = new CardVerificationCodeEditText(reactContext);
         editText.setIsRequired(true);
         editText.setFieldName(FIELD_NAME);
         editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
-        editText.setFieldType(FieldType.CVC);
 
         vgsTextInputLayout.addView(editText);
 
         listener.onCreateViewInstance(editText);
-
-        return vgsTextInputLayout;
     }
 
     @ReactProp(name="url")
@@ -62,7 +66,7 @@ public class CardCVCManager extends ViewGroupManager<VGSTextInputLayout> {
         android.widget.Toast.makeText(field.getContext(), urlPath, Toast.LENGTH_SHORT).show();
     }
 
-    public VGSEditText getEditTextInstance() { // <-- returns the View instance
+    public CardVerificationCodeEditText getEditTextInstance() { // <-- returns the View instance
         return editText;
     }
 
