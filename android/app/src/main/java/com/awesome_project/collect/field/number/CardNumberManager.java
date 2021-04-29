@@ -18,6 +18,8 @@ import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.verygoodsecurity.reactnative.collect.OnCreateViewInstanceListener;
 import com.verygoodsecurity.vgscollect.view.card.FieldType;
+import com.facebook.react.uimanager.annotations.ReactProp;
+import com.facebook.react.bridge.ReadableArray;
 
 public class CardNumberManager extends ViewGroupManager<VGSTextInputLayout> {
     public static final String FIELD_NAME = "cardNumber";
@@ -46,7 +48,17 @@ public class CardNumberManager extends ViewGroupManager<VGSTextInputLayout> {
 
     private void createVGSTextInputLayout(ThemedReactContext reactContext) {
         vgsTextInputLayout = new VGSTextInputLayout(reactContext);
-        vgsTextInputLayout.setHint("card number");
+    }
+
+    @ReactProp(name = "hint")
+    public void setHint(VGSTextInputLayout view, String text) {
+        Log.e("TAG", "text: " + text);
+        view.setHint(text);
+    }
+
+    @ReactProp(name = "corners", defaultInt = 0)
+    public void setBoxCornerRadius(VGSTextInputLayout view, int radius) {
+        view.setBoxCornerRadius(radius, radius, radius, radius);
     }
 
     private void createVGSCardNumberEditText(ThemedReactContext reactContext) {
@@ -60,11 +72,6 @@ public class CardNumberManager extends ViewGroupManager<VGSTextInputLayout> {
         vgsTextInputLayout.addView(editText);
 
         listener.onCreateViewInstance(editText);
-    }
-
-    @ReactProp(name = "url")
-    public void setTestPath(VGSTextInputLayout field, String urlPath) {
-        android.widget.Toast.makeText(field.getContext(), urlPath, Toast.LENGTH_SHORT).show();
     }
 
     public VGSCardNumberEditText getEditTextInstance() { // <-- returns the View instance

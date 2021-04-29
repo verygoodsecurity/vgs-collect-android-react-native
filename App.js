@@ -70,7 +70,11 @@ constructor(props) {
             <View style={{flex: 1,flexDirection: 'row'}}>
                 <View style={styles.bodyContent }>
                     <View style={styles.container} >
-                        <CardNumberLayout style={styles.field} />
+                        <CardNumberLayout
+                            style={styles.field}
+                            hint={'Card Number'}
+                            corners={15}
+                            />
                     </View>
                     <View style={styles.container} >
                         <CardHolderLayout style={styles.field} />
