@@ -1,4 +1,4 @@
-package com.awesome_project.fields.number;
+package com.verygoodsecurity.reactnative.fields.number;
 
 import android.net.Uri;
 import android.widget.Toast;
@@ -16,7 +16,7 @@ import com.facebook.react.uimanager.ViewGroupManager;
 import android.util.TypedValue;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
-import com.awesome_project.fields.OnCreateViewInstanceListener;
+import com.verygoodsecurity.reactnative.fields.OnCreateViewInstanceListener;
 import com.verygoodsecurity.vgscollect.view.card.FieldType;
 
 public class CardNumberManager extends ViewGroupManager<VGSTextInputLayout> {

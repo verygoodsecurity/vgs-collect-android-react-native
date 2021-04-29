@@ -1,4 +1,4 @@
-package com.awesome_project.scanner;
+package com.verygoodsecurity.reactnative.scanner;
 
 import android.content.Intent;
 import android.os.Bundle;

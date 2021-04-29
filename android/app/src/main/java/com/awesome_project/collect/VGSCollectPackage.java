@@ -1,4 +1,4 @@
-package com.awesome_project.collect;
+package com.verygoodsecurity.reactnative.collect;
 
 
 import com.facebook.react.ReactPackage;
@@ -12,7 +12,7 @@ import java.util.Arrays;
 import android.widget.Toast;
 import android.app.Activity;
 import android.util.Log;
-import com.awesome_project.fields.OnCreateViewInstanceListener;
+import com.verygoodsecurity.reactnative.fields.OnCreateViewInstanceListener;
 import com.verygoodsecurity.vgscollect.view.InputFieldView;
 
 public class VGSCollectPackage implements ReactPackage, OnCreateViewInstanceListener {

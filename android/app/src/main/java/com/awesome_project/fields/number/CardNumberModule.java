@@ -1,4 +1,4 @@
-package com.awesome_project.fields.number;
+package com.verygoodsecurity.reactnative.fields.number;
 
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -20,7 +20,7 @@ import android.app.Activity;
 import com.verygoodsecurity.vgscollect.core.Environment;
 import com.verygoodsecurity.vgscollect.core.VGSCollect;
 import com.verygoodsecurity.vgscollect.core.HTTPMethod;
-import com.awesome_project.fields.OnCreateViewInstanceListener;
+import com.verygoodsecurity.reactnative.fields.OnCreateViewInstanceListener;
 import com.verygoodsecurity.vgscollect.view.InputFieldView;
 
 public class CardNumberModule extends ReactContextBaseJavaModule {

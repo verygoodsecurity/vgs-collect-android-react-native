@@ -1,4 +1,4 @@
-package com.awesome_project.fields.date;
+package com.verygoodsecurity.reactnative.fields.date;
 
 import android.net.Uri;
 import android.widget.Toast;
@@ -17,7 +17,7 @@ import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.verygoodsecurity.vgscollect.view.date.DatePickerMode;
-import com.awesome_project.fields.OnCreateViewInstanceListener;
+import com.verygoodsecurity.reactnative.fields.OnCreateViewInstanceListener;
 import com.verygoodsecurity.vgscollect.view.card.FieldType;
 
 public class CardExpDateManager extends ViewGroupManager<VGSTextInputLayout> {

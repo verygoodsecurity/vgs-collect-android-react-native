@@ -128,7 +128,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.awesome_project"
+        applicationId "com.verygoodsecurity.reactnative"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

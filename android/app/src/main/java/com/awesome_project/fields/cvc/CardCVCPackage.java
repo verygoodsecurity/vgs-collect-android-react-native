@@ -1,4 +1,4 @@
-package com.awesome_project.fields.cvc;
+package com.verygoodsecurity.reactnative.fields.cvc;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
@@ -7,7 +7,7 @@ import com.facebook.react.uimanager.ViewManager;
 import java.util.Collections;
 import java.util.List;
 import java.util.Arrays;
-import com.awesome_project.fields.OnCreateViewInstanceListener;
+import com.verygoodsecurity.reactnative.fields.OnCreateViewInstanceListener;
 
 public class CardCVCPackage implements ReactPackage {
 

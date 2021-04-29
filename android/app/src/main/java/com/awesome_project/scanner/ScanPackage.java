@@ -1,4 +1,4 @@
-package com.awesome_project.scanner;
+package com.verygoodsecurity.reactnative.scanner;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +18,7 @@ import java.util.Arrays;
 import android.widget.Toast;
 import android.app.Activity;
 import android.util.Log;
-import com.awesome_project.fields.OnCreateViewInstanceListener;
+import com.verygoodsecurity.reactnative.fields.OnCreateViewInstanceListener;
 import com.verygoodsecurity.vgscollect.view.InputFieldView;
 import java.util.Collections;
 

@@ -1,4 +1,4 @@
-package com.awesome_project;
+package com.verygoodsecurity.reactnative;
 
 import com.facebook.react.ReactActivity;
 import android.app.Activity;
@@ -8,15 +8,15 @@ import com.facebook.react.bridge.Arguments;
 import android.os.Bundle;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import android.util.Log;
-import com.awesome_project.scanner.ScanModule;
+import com.verygoodsecurity.reactnative.scanner.ScanModule;
 import java.util.List;
 import java.util.ArrayList;
 import com.facebook.react.ReactPackage;
 import java.util.Arrays;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.awesome_project.collect.VGSCollectModule;
-import com.awesome_project.collect.VGSCollectPackage;
+import com.verygoodsecurity.reactnative.collect.VGSCollectModule;
+import com.verygoodsecurity.reactnative.collect.VGSCollectPackage;
 
 public class MainActivity extends ReactActivity {
 

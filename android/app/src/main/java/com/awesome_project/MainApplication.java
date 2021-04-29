@@ -1,4 +1,4 @@
-package com.awesome_project;
+package com.verygoodsecurity.reactnative;
 
 import android.app.Application;
 import android.content.Context;
@@ -12,14 +12,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Arrays;
 import android.app.Activity;
-import com.awesome_project.collect.VGSCollectPackage;
-import com.awesome_project.fields.holder.CardHolderPackage;
-import com.awesome_project.fields.cvc.CardCVCPackage;
-import com.awesome_project.fields.date.CardExpDatePackage;
-import com.awesome_project.fields.number.CardNumberPackage;
-import com.awesome_project.fields.OnCreateViewInstanceListener;
+import com.verygoodsecurity.reactnative.collect.VGSCollectPackage;
+import com.verygoodsecurity.reactnative.fields.holder.CardHolderPackage;
+import com.verygoodsecurity.reactnative.fields.cvc.CardCVCPackage;
+import com.verygoodsecurity.reactnative.fields.date.CardExpDatePackage;
+import com.verygoodsecurity.reactnative.fields.number.CardNumberPackage;
+import com.verygoodsecurity.reactnative.fields.OnCreateViewInstanceListener;
 import android.util.Log;
-import com.awesome_project.scanner.ScanPackage;
+import com.verygoodsecurity.reactnative.scanner.ScanPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
