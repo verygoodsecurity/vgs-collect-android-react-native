@@ -19,7 +19,7 @@ import com.verygoodsecurity.reactnative.fields.date.CardExpDatePackage;
 import com.verygoodsecurity.reactnative.fields.number.CardNumberPackage;
 import com.verygoodsecurity.reactnative.fields.OnCreateViewInstanceListener;
 import android.util.Log;
-import com.verygoodsecurity.reactnative.scanner.ScanPackage;
+import com.verygoodsecurity.reactnative.collect.scanner.ScanPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 

@@ -8,7 +8,7 @@ import com.facebook.react.bridge.Arguments;
 import android.os.Bundle;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import android.util.Log;
-import com.verygoodsecurity.reactnative.scanner.ScanModule;
+import com.verygoodsecurity.reactnative.collect.scanner.ScanModule;
 import java.util.List;
 import java.util.ArrayList;
 import com.facebook.react.ReactPackage;
