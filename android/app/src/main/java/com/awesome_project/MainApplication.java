@@ -13,11 +13,11 @@ import java.util.List;
 import java.util.Arrays;
 import android.app.Activity;
 import com.verygoodsecurity.reactnative.collect.VGSCollectPackage;
-import com.verygoodsecurity.reactnative.fields.holder.CardHolderPackage;
-import com.verygoodsecurity.reactnative.fields.cvc.CardCVCPackage;
-import com.verygoodsecurity.reactnative.fields.date.CardExpDatePackage;
-import com.verygoodsecurity.reactnative.fields.number.CardNumberPackage;
-import com.verygoodsecurity.reactnative.fields.OnCreateViewInstanceListener;
+import com.verygoodsecurity.reactnative.collect.field.holder.CardHolderPackage;
+import com.verygoodsecurity.reactnative.collect.field.cvc.CardCVCPackage;
+import com.verygoodsecurity.reactnative.collect.field.date.CardExpDatePackage;
+import com.verygoodsecurity.reactnative.collect.field.number.CardNumberPackage;
+import com.verygoodsecurity.reactnative.collect.OnCreateViewInstanceListener;
 import android.util.Log;
 import com.verygoodsecurity.reactnative.collect.scanner.ScanPackage;
 

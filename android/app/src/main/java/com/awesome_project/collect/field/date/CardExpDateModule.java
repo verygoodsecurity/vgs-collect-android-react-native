@@ -1,4 +1,4 @@
-package com.verygoodsecurity.reactnative.fields.holder;
+package com.verygoodsecurity.reactnative.collect.field.date;
 
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -18,14 +18,14 @@ import android.app.Activity;
 import com.verygoodsecurity.vgscollect.core.Environment;
 import com.verygoodsecurity.vgscollect.core.VGSCollect;
 import com.verygoodsecurity.vgscollect.core.HTTPMethod;
-import com.verygoodsecurity.reactnative.fields.OnCreateViewInstanceListener;
+import com.verygoodsecurity.reactnative.collect.OnCreateViewInstanceListener;
 import com.verygoodsecurity.vgscollect.view.InputFieldView;
 
-public class CardHolderModule extends ReactContextBaseJavaModule {
+public class CardExpDateModule extends ReactContextBaseJavaModule {
 
     private String fieldName;
 
-    public CardHolderModule(ReactApplicationContext reactContext, CardHolderManager calManager) {
+    public CardExpDateModule(ReactApplicationContext reactContext, CardExpDateManager calManager) {
         super(reactContext);
         if (calManager != null) {
             fieldName = calManager.getFieldName();
@@ -34,7 +34,7 @@ public class CardHolderModule extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return "HolderVGSEditText";
+        return "ExpDateEditText";
     }
 
     @ReactMethod

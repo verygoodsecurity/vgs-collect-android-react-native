@@ -1,4 +1,4 @@
-package com.verygoodsecurity.reactnative.fields;
+package com.verygoodsecurity.reactnative.collect;
 
 import com.verygoodsecurity.vgscollect.view.InputFieldView;
 

@@ -1,4 +1,4 @@
-package com.verygoodsecurity.reactnative.fields.holder;
+package com.verygoodsecurity.reactnative.collect.field.cvc;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
@@ -7,31 +7,31 @@ import com.facebook.react.uimanager.ViewManager;
 import java.util.Collections;
 import java.util.List;
 import java.util.Arrays;
-import com.verygoodsecurity.reactnative.fields.OnCreateViewInstanceListener;
+import com.verygoodsecurity.reactnative.collect.OnCreateViewInstanceListener;
 
-public class CardHolderPackage implements ReactPackage {
+public class CardCVCPackage implements ReactPackage {
 
   private OnCreateViewInstanceListener listener;
-  private CardHolderManager calManager;
+  private CardCVCManager calManager;
 
-  public CardHolderPackage(OnCreateViewInstanceListener listener) {
+  public CardCVCPackage(OnCreateViewInstanceListener listener) {
     this.listener = listener;
   }
 
   @Override
   public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
       if (calManager == null) {
-        calManager = new CardHolderManager(listener);
+        calManager = new CardCVCManager(listener);
       }
       return Arrays.<NativeModule>asList(
-              new CardHolderModule(reactContext, calManager)
+              new CardCVCModule(reactContext, calManager)
       );
   }
 
   @Override
   public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
     if (calManager == null) {
-      calManager = new CardHolderManager(listener);
+      calManager = new CardCVCManager(listener);
     }
     return Arrays.<ViewManager>asList(
             calManager

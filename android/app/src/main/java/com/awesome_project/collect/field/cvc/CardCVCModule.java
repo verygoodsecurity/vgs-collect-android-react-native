@@ -1,4 +1,4 @@
-package com.verygoodsecurity.reactnative.fields.cvc;
+package com.verygoodsecurity.reactnative.collect.field.cvc;
 
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -18,7 +18,7 @@ import android.app.Activity;
 import com.verygoodsecurity.vgscollect.core.Environment;
 import com.verygoodsecurity.vgscollect.core.VGSCollect;
 import com.verygoodsecurity.vgscollect.core.HTTPMethod;
-import com.verygoodsecurity.reactnative.fields.OnCreateViewInstanceListener;
+import com.verygoodsecurity.reactnative.collect.OnCreateViewInstanceListener;
 import com.verygoodsecurity.vgscollect.view.InputFieldView;
 
 public class CardCVCModule extends ReactContextBaseJavaModule {

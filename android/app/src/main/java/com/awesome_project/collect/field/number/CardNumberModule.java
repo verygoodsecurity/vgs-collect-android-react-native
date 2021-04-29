@@ -1,4 +1,4 @@
-package com.verygoodsecurity.reactnative.fields.date;
+package com.verygoodsecurity.reactnative.collect.field.number;
 
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -11,6 +11,8 @@ import com.facebook.react.uimanager.IllegalViewOperationException;
 import android.util.Log;
 import android.content.Intent;
 import com.facebook.react.bridge.Promise;
+import com.verygoodsecurity.vgscollect.widget.VGSCardNumberEditText;
+import com.verygoodsecurity.vgscollect.widget.VGSTextInputLayout;
 import android.widget.Toast;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,14 +20,14 @@ import android.app.Activity;
 import com.verygoodsecurity.vgscollect.core.Environment;
 import com.verygoodsecurity.vgscollect.core.VGSCollect;
 import com.verygoodsecurity.vgscollect.core.HTTPMethod;
-import com.verygoodsecurity.reactnative.fields.OnCreateViewInstanceListener;
+import com.verygoodsecurity.reactnative.collect.OnCreateViewInstanceListener;
 import com.verygoodsecurity.vgscollect.view.InputFieldView;
 
-public class CardExpDateModule extends ReactContextBaseJavaModule {
+public class CardNumberModule extends ReactContextBaseJavaModule {
 
     private String fieldName;
 
-    public CardExpDateModule(ReactApplicationContext reactContext, CardExpDateManager calManager) {
+    public CardNumberModule(ReactApplicationContext reactContext, CardNumberManager calManager) {
         super(reactContext);
         if (calManager != null) {
             fieldName = calManager.getFieldName();
@@ -34,7 +36,7 @@ public class CardExpDateModule extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return "ExpDateEditText";
+        return "NumberVGSEditText";
     }
 
     @ReactMethod

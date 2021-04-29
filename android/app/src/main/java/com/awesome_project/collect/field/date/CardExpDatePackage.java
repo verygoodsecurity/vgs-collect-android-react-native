@@ -1,4 +1,4 @@
-package com.verygoodsecurity.reactnative.fields.date;
+package com.verygoodsecurity.reactnative.collect.field.date;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
@@ -7,7 +7,7 @@ import com.facebook.react.uimanager.ViewManager;
 import java.util.Collections;
 import java.util.List;
 import java.util.Arrays;
-import com.verygoodsecurity.reactnative.fields.OnCreateViewInstanceListener;
+import com.verygoodsecurity.reactnative.collect.OnCreateViewInstanceListener;
 
 public class CardExpDatePackage implements ReactPackage {
 
