@@ -1,11 +1,12 @@
 package com.verygoodsecurity.reactnative.collect.field.number;
 
 import android.net.Uri;
-import android.widget.Toast;
 import android.view.Gravity;
+
 import com.facebook.react.bridge.ReactMethod;
+
 import android.util.Log;
-import android.widget.Toast;
+
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.uimanager.IllegalViewOperationException;
@@ -13,13 +14,16 @@ import com.verygoodsecurity.vgscollect.widget.VGSCardNumberEditText;
 import com.verygoodsecurity.vgscollect.widget.VGSTextInputLayout;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ViewGroupManager;
+
 import android.util.TypedValue;
+
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.verygoodsecurity.reactnative.collect.OnCreateViewInstanceListener;
 import com.verygoodsecurity.vgscollect.view.card.FieldType;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.bridge.ReadableArray;
+import com.verygoodsecurity.reactnative.util.ResourceUtil;
 
 public class CardNumberManager extends ViewGroupManager<VGSTextInputLayout> {
     public static final String FIELD_NAME = "cardNumber";
@@ -50,9 +54,19 @@ public class CardNumberManager extends ViewGroupManager<VGSTextInputLayout> {
         vgsTextInputLayout = new VGSTextInputLayout(reactContext);
     }
 
+    @ReactProp(name = "padding")
+    public void setPadding(VGSTextInputLayout view, int padding) {
+        int paddingDp = ResourceUtil.convertPxToDp(view.getContext(), padding);
+        editText.setPadding(paddingDp, paddingDp, paddingDp, paddingDp);
+    }
+
+    @ReactProp(name = "fontSize")
+    public void setFontSize(VGSTextInputLayout view, int size) {
+        editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, size);
+    }
+
     @ReactProp(name = "hint")
     public void setHint(VGSTextInputLayout view, String text) {
-        Log.e("TAG", "text: " + text);
         view.setHint(text);
     }
 
@@ -81,4 +95,5 @@ public class CardNumberManager extends ViewGroupManager<VGSTextInputLayout> {
     public String getFieldName() { // <-- returns the View instance
         return FIELD_NAME;
     }
+
 }

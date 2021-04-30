@@ -22,8 +22,13 @@ import com.verygoodsecurity.vgscollect.core.VgsCollectResponseListener;
 import com.verygoodsecurity.vgscollect.core.model.network.VGSResponse;
 import com.verygoodsecurity.vgscollect.core.model.state.FieldState;
 import com.verygoodsecurity.vgscollect.core.storage.OnFieldStateChangeListener;
+import com.verygoodsecurity.vgscollect.VGSCollectLogger;
+import com.verygoodsecurity.reactnative.util.JSONObjectUtil;
 
 public class VGSCollectModule extends ReactContextBaseJavaModule {
+
+    private static final String RESPONSE_EVENT_NAME = "onVGSResponse";
+
     private static ReactApplicationContext reactContext;
     private Activity activity;
 
@@ -44,7 +49,9 @@ public class VGSCollectModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void init() {
-        collect = new VGSCollect.Builder(activity, "<vault_id>")
+        VGSCollectLogger.INSTANCE.setLogLevel(VGSCollectLogger.Level.DEBUG);
+
+        collect = new VGSCollect.Builder(activity, "tntpszqgikn")
                 .setEnvironment(Environment.SANDBOX)
                 .create();
 
@@ -92,43 +99,59 @@ public class VGSCollectModule extends ReactContextBaseJavaModule {
     }
 
     private void sendResponse(VGSResponse response) {
-        String eventName = "onVGSResponse";
-        String responseStr = "onVGSResponse";
+        String responseStr = " ";
 
         if(response instanceof VGSResponse.SuccessResponse ) {
-            responseStr = "Code: " + ((VGSResponse.SuccessResponse) response).getSuccessCode();;
-        } else {
-            responseStr = "Code: " + response.toString();
+            parseNumberAlias(response);
+            parseDateAlias(response);
+
+            responseStr = "Code: " + ((VGSResponse.SuccessResponse) response).getSuccessCode();
+        } else if(response instanceof VGSResponse.ErrorResponse ) {
+            responseStr = new StringBuilder("Code: ")
+                    .append(response.getCode())
+                    .append(" \n ")
+                    .append(((VGSResponse.ErrorResponse) response).getLocalizeMessage())
+                    .toString();
         }
 
         this.getReactApplicationContext()
                 .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-                .emit(eventName, responseStr);
+                .emit(RESPONSE_EVENT_NAME, responseStr);
+
+    }
+
+    private void parseNumberAlias(VGSResponse response) {
+        String token = JSONObjectUtil.getValue(response.getBody(), "cardNumber");
+        this.getReactApplicationContext()
+                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit("cardNumberToken", token);
+    }
+
+    private void parseDateAlias(VGSResponse response) {
+        String token = JSONObjectUtil.getValue(response.getBody(), "expDate");
+        this.getReactApplicationContext()
+                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit("expirationDateToken", token);
     }
 
     private void updateUserStates() {
-        String eventName = "onVGSStateChange";
         List<FieldState> states = collect.getAllStates();
-        StringBuilder builder = new StringBuilder();
-        for(int i = 0; i<states.size();i++) {
-            FieldState it = states.get(i);
-            builder.append(it.getFieldName()).append("\n")
-                    .append("   hasFocus: ").append(it.getHasFocus()).append("\n")
-                    .append("   isValid: ").append(it.isValid()).append("\n")
-                    .append("   isEmpty: ").append(it.isEmpty()).append("\n")
-                    .append("   isRequired: ").append(it.isRequired()).append("\n");
-            if (it instanceof FieldState.CardNumberState) {
-                builder.append("    type: ").append(((FieldState.CardNumberState) it).getCardBrand()).append("\n")
-                        .append("       end: ").append(((FieldState.CardNumberState) it).getLast()).append("\n")
-                        .append("       bin: ").append(((FieldState.CardNumberState) it).getBin()).append("\n")
-                        .append(((FieldState.CardNumberState) it).getNumber()).append("\n");
-            }
 
-            builder.append("\n");
+        for(int i = 0; i < states.size(); i++) {
+            FieldState state = states.get(i);
+
+            if(!state.isValid()) {
+                String message = new StringBuilder("Field ")
+                        .append(state.getFieldName())
+                        .append(" is not valid.")
+                        .toString();
+
+                this.getReactApplicationContext()
+                        .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                        .emit(RESPONSE_EVENT_NAME, message);
+                break;
+            }
         }
-        this.getReactApplicationContext()
-                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-                .emit(eventName, builder.toString());
     }
 
 }

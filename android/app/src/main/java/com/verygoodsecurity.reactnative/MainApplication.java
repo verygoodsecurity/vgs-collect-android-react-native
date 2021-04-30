@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.Arrays;
 import android.app.Activity;
 import com.verygoodsecurity.reactnative.collect.VGSCollectPackage;
-import com.verygoodsecurity.reactnative.collect.field.holder.CardHolderPackage;
-import com.verygoodsecurity.reactnative.collect.field.cvc.CardCVCPackage;
 import com.verygoodsecurity.reactnative.collect.field.date.CardExpDatePackage;
 import com.verygoodsecurity.reactnative.collect.field.number.CardNumberPackage;
 import com.verygoodsecurity.reactnative.collect.OnCreateViewInstanceListener;
@@ -35,16 +33,12 @@ public class MainApplication extends Application implements ReactApplication {
             VGSCollectPackage collect = new VGSCollectPackage();
             OnCreateViewInstanceListener listener = collect.getListener();
             CardNumberPackage number = new CardNumberPackage(listener);
-            CardHolderPackage holder = new CardHolderPackage(listener);
-            CardCVCPackage cvc = new CardCVCPackage(listener);
             CardExpDatePackage expDate = new CardExpDatePackage(listener);
 
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
                     new ScanPackage(),
                     number,
-                    holder,
-                    cvc,
                     expDate,
                     collect
             );
