@@ -15,7 +15,7 @@ import android.app.Activity;
 import com.verygoodsecurity.vgscollect.core.Environment;
 import com.verygoodsecurity.vgscollect.core.VGSCollect;
 import com.verygoodsecurity.vgscollect.core.HTTPMethod;
-import com.verygoodsecurity.reactnative.collect.OnCreateViewInstanceListener;
+import com.verygoodsecurity.reactnative.collect.VGSCollectOnCreateViewInstanceListener;
 import com.verygoodsecurity.vgscollect.view.InputFieldView;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.verygoodsecurity.vgscollect.core.VgsCollectResponseListener;
@@ -27,10 +27,10 @@ import com.verygoodsecurity.reactnative.util.JSONObjectUtil;
 
 public class VGSCollectModule extends ReactContextBaseJavaModule {
 
-    private static final String RESPONSE_EVENT_NAME = "onVGSResponse";
+    private static final String RESPONSE_EVENT_NAME = "VGSCollectOnVGSResponse";
+    private static final String VAULT_ID = "tntpszqgikn";
 
     private static ReactApplicationContext reactContext;
-    private Activity activity;
 
     private VGSCollect collect;
 
@@ -42,22 +42,22 @@ public class VGSCollectModule extends ReactContextBaseJavaModule {
     @Override
     public void initialize() {
         super.initialize();
-        activity = reactContext.getCurrentActivity();
-
-        init();
-    }
-
-    @ReactMethod
-    public void init() {
         VGSCollectLogger.INSTANCE.setLogLevel(VGSCollectLogger.Level.DEBUG);
 
-        collect = new VGSCollect.Builder(activity, "tntpszqgikn")
+        Activity activity = reactContext.getCurrentActivity();
+        collect = new VGSCollect.Builder(activity, VAULT_ID)
                 .setEnvironment(Environment.SANDBOX)
                 .create();
 
         initListeners();
-        addStaticHeaders();
     }
+//
+//    @ReactMethod
+//    public void init() {
+//
+//
+//
+//    }
 
     private void initListeners() {
         collect.addOnResponseListeners(new VgsCollectResponseListener() {
@@ -72,12 +72,6 @@ public class VGSCollectModule extends ReactContextBaseJavaModule {
                 updateUserStates();
             }
         });
-    }
-
-    private void addStaticHeaders() {
-        HashMap data = new HashMap<String, String>();
-        data.put("nonSDKValue", "some additional data");
-        collect.setCustomData(data);
     }
 
     @Override

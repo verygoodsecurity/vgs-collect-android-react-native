@@ -1,4 +1,4 @@
-package com.verygoodsecurity.reactnative.collect;
+package com.verygoodsecurity.reactnative.show;
 
 
 import com.facebook.react.ReactPackage;
@@ -12,23 +12,23 @@ import java.util.Arrays;
 import android.widget.Toast;
 import android.app.Activity;
 import android.util.Log;
-import com.verygoodsecurity.reactnative.collect.VGSCollectOnCreateViewInstanceListener;
-import com.verygoodsecurity.vgscollect.view.InputFieldView;
+import com.verygoodsecurity.reactnative.show.VGSShowOnCreateViewInstanceListener;
+import com.verygoodsecurity.vgsshow.widget.core.VGSView;
 
-public class VGSCollectPackage implements ReactPackage, VGSCollectOnCreateViewInstanceListener {
+public class VGSShowPackage implements ReactPackage, VGSShowOnCreateViewInstanceListener {
 
-  private VGSCollectModule module;
+  private VGSShowModule module;
 
-  public VGSCollectOnCreateViewInstanceListener getListener() {
+  public VGSShowOnCreateViewInstanceListener getListener() {
     return this;
   }
 
-  public VGSCollectModule getVGSCollectModule() {
+  public VGSShowModule getVGSShowModule() {
     return module;
   }
 
   @Override
-  public void onCreateViewInstance(InputFieldView inputFieldView) {
+  public void onCreateViewInstance(VGSView inputFieldView) {
     module.bindView(inputFieldView);
   }
 
@@ -39,7 +39,7 @@ public class VGSCollectPackage implements ReactPackage, VGSCollectOnCreateViewIn
 
   @Override
   public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-    module = new VGSCollectModule(reactContext);
+    module = new VGSShowModule(reactContext);
 
     List<NativeModule> modules = new ArrayList<>();
 

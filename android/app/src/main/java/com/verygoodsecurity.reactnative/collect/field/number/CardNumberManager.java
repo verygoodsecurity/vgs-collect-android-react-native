@@ -1,6 +1,5 @@
 package com.verygoodsecurity.reactnative.collect.field.number;
 
-import android.net.Uri;
 import android.view.Gravity;
 
 import com.facebook.react.bridge.ReactMethod;
@@ -19,20 +18,19 @@ import android.util.TypedValue;
 
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
-import com.verygoodsecurity.reactnative.collect.OnCreateViewInstanceListener;
+import com.verygoodsecurity.reactnative.collect.VGSCollectOnCreateViewInstanceListener;
 import com.verygoodsecurity.vgscollect.view.card.FieldType;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.bridge.ReadableArray;
 import com.verygoodsecurity.reactnative.util.ResourceUtil;
 
 public class CardNumberManager extends ViewGroupManager<VGSTextInputLayout> {
-    public static final String FIELD_NAME = "cardNumber";
     private VGSCardNumberEditText editText;
     private VGSTextInputLayout vgsTextInputLayout;
 
-    private OnCreateViewInstanceListener listener;
+    private VGSCollectOnCreateViewInstanceListener listener;
 
-    CardNumberManager(OnCreateViewInstanceListener listener) {
+    CardNumberManager(VGSCollectOnCreateViewInstanceListener listener) {
         super();
         this.listener = listener;
     }
@@ -70,6 +68,11 @@ public class CardNumberManager extends ViewGroupManager<VGSTextInputLayout> {
         view.setHint(text);
     }
 
+    @ReactProp(name = "fiendName")
+    public void setFieldName(VGSTextInputLayout view, String text) {
+        editText.setFieldName(text);
+    }
+
     @ReactProp(name = "corners", defaultInt = 0)
     public void setBoxCornerRadius(VGSTextInputLayout view, int radius) {
         view.setBoxCornerRadius(radius, radius, radius, radius);
@@ -81,7 +84,8 @@ public class CardNumberManager extends ViewGroupManager<VGSTextInputLayout> {
         editText.setIsRequired(true);
         editText.setDivider('-');
         editText.setCardBrandIconGravity(Gravity.END);
-        editText.setFieldName(FIELD_NAME);
+
+        editText.setText("4111111111111111");
 
         vgsTextInputLayout.addView(editText);
 
@@ -92,8 +96,12 @@ public class CardNumberManager extends ViewGroupManager<VGSTextInputLayout> {
         return editText;
     }
 
-    public String getFieldName() { // <-- returns the View instance
-        return FIELD_NAME;
+    public String getFieldName() {
+        if(editText == null) {
+            return "";
+        } else {
+            return editText.getFieldName();
+        }
     }
 
 }

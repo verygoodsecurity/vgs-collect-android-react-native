@@ -6,10 +6,10 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import CardNumberLayout from './fields/number/NativeView';
-import NumberVGSEditText from './fields/number/EditText';
 
 import CardExpDateLayout from './fields/date/NativeView';
-import ExpDateVGSEditText from './fields/date/EditText';
+
+import VGSTextView from './fields/show/text/NativeView';
 
 import VGSCollect from './VGSCollect';
 import ScanActivity from './ScanActivity';
@@ -19,7 +19,7 @@ import { DeviceEventEmitter } from 'react-native';
 export default class App extends  Component<Props> {
     constructor(props) {
         super(props);
-        this.listener = DeviceEventEmitter.addListener('onVGSResponse', e => this.showUserData(e));
+        this.listener = DeviceEventEmitter.addListener('VGSCollectOnVGSResponse', e => this.showUserData(e));
         this.listener = DeviceEventEmitter.addListener('cardNumberToken', e => this.showToken1(e));
         this.listener = DeviceEventEmitter.addListener('expirationDateToken', e => this.showToken2(e));
         this.state = {
@@ -65,6 +65,7 @@ export default class App extends  Component<Props> {
                     <CardNumberLayout
                         style={styles.collectField}
                         hint={'Card Number'}
+                        fiendName={'cardNumber'}
                         corners={12}
                         fontSize={10}
                         padding={3}
@@ -78,6 +79,7 @@ export default class App extends  Component<Props> {
                     <CardExpDateLayout
                         style={styles.collectField}
                         hint={'Expiration Date'}
+                        fiendName={'expDate'}
                         corners={12}
                         fontSize={10}
                         padding={3}
@@ -132,6 +134,15 @@ export default class App extends  Component<Props> {
                         Card Number
                     </Text>
 
+                    <VGSTextView
+                        style={styles.collectField}
+                        hint={'Card Number'}
+                        contentPath={'json.payment_card_number'}
+                        corners={12}
+                        fontSize={10}
+                        padding={3}
+                     />
+
                     <Text style={styles.showField} numberOfLines={1}>
                         Expiration Date
                     </Text>
@@ -140,7 +151,7 @@ export default class App extends  Component<Props> {
                         marginBottom:20, marginLeft:20, marginRight:20
                     }}>
                         <Button style={styles.button}
-                            title="Scan"
+                            title="Reveal"
                             onPress={this.handleClick}
                         />
                     </View>

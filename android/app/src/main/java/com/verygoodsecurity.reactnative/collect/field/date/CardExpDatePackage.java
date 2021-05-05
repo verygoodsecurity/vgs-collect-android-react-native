@@ -7,14 +7,14 @@ import com.facebook.react.uimanager.ViewManager;
 import java.util.Collections;
 import java.util.List;
 import java.util.Arrays;
-import com.verygoodsecurity.reactnative.collect.OnCreateViewInstanceListener;
+import com.verygoodsecurity.reactnative.collect.VGSCollectOnCreateViewInstanceListener;
 
 public class CardExpDatePackage implements ReactPackage {
 
-  private OnCreateViewInstanceListener listener;
+  private VGSCollectOnCreateViewInstanceListener listener;
   private CardExpDateManager calManager;
 
-  public CardExpDatePackage(OnCreateViewInstanceListener listener) {
+  public CardExpDatePackage(VGSCollectOnCreateViewInstanceListener listener) {
     this.listener = listener;
   }
 

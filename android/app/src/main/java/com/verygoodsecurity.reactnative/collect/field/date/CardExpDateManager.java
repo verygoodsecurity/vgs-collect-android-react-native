@@ -1,11 +1,8 @@
 package com.verygoodsecurity.reactnative.collect.field.date;
 
-import android.net.Uri;
-import android.widget.Toast;
 import android.view.Gravity;
 import com.facebook.react.bridge.ReactMethod;
 import android.util.Log;
-import android.widget.Toast;
 import android.util.TypedValue;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.Callback;
@@ -17,18 +14,17 @@ import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.verygoodsecurity.vgscollect.view.date.DatePickerMode;
-import com.verygoodsecurity.reactnative.collect.OnCreateViewInstanceListener;
+import com.verygoodsecurity.reactnative.collect.VGSCollectOnCreateViewInstanceListener;
 import com.verygoodsecurity.vgscollect.view.card.FieldType;
 import com.verygoodsecurity.reactnative.util.ResourceUtil;
 
 public class CardExpDateManager extends ViewGroupManager<VGSTextInputLayout> {
-    public static final String FIELD_NAME = "expDate";
     private ExpirationDateEditText editText;
     private VGSTextInputLayout vgsTextInputLayout;
 
-    private OnCreateViewInstanceListener listener;
+    private VGSCollectOnCreateViewInstanceListener listener;
 
-    CardExpDateManager(OnCreateViewInstanceListener listener) {
+    CardExpDateManager(VGSCollectOnCreateViewInstanceListener listener) {
         super();
         this.listener = listener;
     }
@@ -67,6 +63,11 @@ public class CardExpDateManager extends ViewGroupManager<VGSTextInputLayout> {
         view.setHint(text);
     }
 
+    @ReactProp(name = "fiendName")
+    public void setFieldName(VGSTextInputLayout view, String text) {
+        editText.setFieldName(text);
+    }
+
     @ReactProp(name = "corners", defaultInt = 0)
     public void setBoxCornerRadius(VGSTextInputLayout view, int radius) {
         view.setBoxCornerRadius(radius, radius, radius, radius);
@@ -75,27 +76,27 @@ public class CardExpDateManager extends ViewGroupManager<VGSTextInputLayout> {
     private void createExpirationDateEditText(ThemedReactContext reactContext) {
         editText = new ExpirationDateEditText(reactContext);
         editText.setIsRequired(true);
-        editText.setFieldName(FIELD_NAME);
         editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
         editText.setDateRegex("MM/yy");
         editText.setDatePickerMode(DatePickerMode.SPINNER);
+
+        editText.setText("12/37");
 
         vgsTextInputLayout.addView(editText);
 
         listener.onCreateViewInstance(editText);
     }
 
-    @ReactProp(name="url")
-    public void setTestPath(VGSTextInputLayout field, String urlPath) {
-        android.widget.Toast.makeText(field.getContext(), urlPath, Toast.LENGTH_SHORT).show();
-    }
-
     public ExpirationDateEditText getEditTextInstance() { // <-- returns the View instance
         return editText;
     }
 
-    public String getFieldName() { // <-- returns the View instance
-        return FIELD_NAME;
+    public String getFieldName() {
+        if(editText == null) {
+            return "";
+        } else {
+            return editText.getFieldName();
+        }
     }
 
 }

@@ -7,14 +7,14 @@ import com.facebook.react.uimanager.ViewManager;
 import java.util.Collections;
 import java.util.List;
 import java.util.Arrays;
-import com.verygoodsecurity.reactnative.collect.OnCreateViewInstanceListener;
+import com.verygoodsecurity.reactnative.collect.VGSCollectOnCreateViewInstanceListener;
 
 public class CardNumberPackage implements ReactPackage {
 
-  private OnCreateViewInstanceListener listener;
+  private VGSCollectOnCreateViewInstanceListener listener;
   private CardNumberManager calManager;
 
-  public CardNumberPackage(OnCreateViewInstanceListener listener) {
+  public CardNumberPackage(VGSCollectOnCreateViewInstanceListener listener) {
     this.listener = listener;
   }
 

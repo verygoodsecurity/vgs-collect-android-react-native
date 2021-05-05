@@ -18,7 +18,7 @@ import java.util.Arrays;
 import android.widget.Toast;
 import android.app.Activity;
 import android.util.Log;
-import com.verygoodsecurity.reactnative.collect.OnCreateViewInstanceListener;
+import com.verygoodsecurity.reactnative.collect.VGSCollectOnCreateViewInstanceListener;
 import com.verygoodsecurity.vgscollect.view.InputFieldView;
 import java.util.Collections;
 

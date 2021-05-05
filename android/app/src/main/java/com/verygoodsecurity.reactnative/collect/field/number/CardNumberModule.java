@@ -20,7 +20,7 @@ import android.app.Activity;
 import com.verygoodsecurity.vgscollect.core.Environment;
 import com.verygoodsecurity.vgscollect.core.VGSCollect;
 import com.verygoodsecurity.vgscollect.core.HTTPMethod;
-import com.verygoodsecurity.reactnative.collect.OnCreateViewInstanceListener;
+import com.verygoodsecurity.reactnative.collect.VGSCollectOnCreateViewInstanceListener;
 import com.verygoodsecurity.vgscollect.view.InputFieldView;
 
 public class CardNumberModule extends ReactContextBaseJavaModule {
