@@ -51,13 +51,6 @@ public class VGSCollectModule extends ReactContextBaseJavaModule {
 
         initListeners();
     }
-//
-//    @ReactMethod
-//    public void init() {
-//
-//
-//
-//    }
 
     private void initListeners() {
         collect.addOnResponseListeners(new VgsCollectResponseListener() {
@@ -89,6 +82,7 @@ public class VGSCollectModule extends ReactContextBaseJavaModule {
     }
 
     public void bindView(InputFieldView inputFieldView) {
+        Log.e("test", "collect bindView "+inputFieldView.getFieldName());
         collect.bindView(inputFieldView);
     }
 

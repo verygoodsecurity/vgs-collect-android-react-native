@@ -19,10 +19,10 @@ import com.verygoodsecurity.reactnative.collect.VGSCollectModule;
 import com.verygoodsecurity.reactnative.collect.VGSCollectPackage;
 
 public class MainActivity extends ReactActivity {
-//"VGS React Native Demo"
+
   @Override
   protected String getMainComponentName() {
-    return "Awesome_Project";
+    return "VGS React Native Demo";
   }
 
   @Override

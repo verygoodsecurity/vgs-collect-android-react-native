@@ -28,8 +28,8 @@ public class VGSShowPackage implements ReactPackage, VGSShowOnCreateViewInstance
   }
 
   @Override
-  public void onCreateViewInstance(VGSView inputFieldView) {
-    module.bindView(inputFieldView);
+  public void onCreateViewInstance(VGSView view) {
+    module.subscribe(view);
   }
 
   @Override

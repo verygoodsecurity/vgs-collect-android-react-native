@@ -11,8 +11,10 @@ import CardExpDateLayout from './fields/date/NativeView';
 
 import VGSTextView from './fields/show/text/NativeView';
 
-import VGSCollect from './VGSCollect';
-import ScanActivity from './ScanActivity';
+import VGSShow from './module/show/VGSShow';
+
+import VGSCollect from './module/collect/VGSCollect';
+import ScanActivity from './module/collect/ScanActivity';
 
 import { DeviceEventEmitter } from 'react-native';
 
@@ -20,12 +22,12 @@ export default class App extends  Component<Props> {
     constructor(props) {
         super(props);
         this.listener = DeviceEventEmitter.addListener('VGSCollectOnVGSResponse', e => this.showUserData(e));
-        this.listener = DeviceEventEmitter.addListener('cardNumberToken', e => this.showToken1(e));
-        this.listener = DeviceEventEmitter.addListener('expirationDateToken', e => this.showToken2(e));
+        this.listener = DeviceEventEmitter.addListener('cardNumberToken', e => this.showCardNumberToken(e));
+        this.listener = DeviceEventEmitter.addListener('expirationDateToken', e => this.showExpirationDateToken(e));
         this.state = {
           bodyText: "Code:",
-          token1: " ",
-          token2: " ",
+          cardNumberToken: " ",
+          expirationDateToken: " ",
         };
     }
 
@@ -33,16 +35,24 @@ export default class App extends  Component<Props> {
         this.setState({ bodyText: msg })
     }
 
-    showToken1 = (msg) => {
-        this.setState({ token1: msg })
+    showCardNumberToken = (msg) => {
+        this.setState({ cardNumberToken: msg })
     }
 
-    showToken2 = (msg) => {
-        this.setState({ token2: msg })
+    showExpirationDateToken = (msg) => {
+        this.setState({ expirationDateToken: msg })
     }
 
+    revealData = () => {
+        var data = {
+            'payment_card_number': this.state.cardNumberToken,
+            'payment_card_expiration_date': this.state.expirationDateToken
+        };
 
-    handleClick = () => {
+        VGSShow.submitAsync(data)
+    }
+
+    collectData = () => {
         NumberVGSEditText.getFieldName((msg) => {
             ScanActivity.setItem(msg, ScanActivity.CARD_NUMBER);
         });
@@ -60,35 +70,37 @@ export default class App extends  Component<Props> {
                 justifyContent:'center'
             }}>
                 <View style={{
-                    width:'49%', height: '100%', padding:3,
+                    width:'60%', height: '100%', padding:3,
                 }}>
                     <CardNumberLayout
                         style={styles.collectField}
                         hint={'Card Number'}
                         fiendName={'cardNumber'}
                         corners={12}
-                        fontSize={10}
+                        fontSize={12}
                         padding={3}
                     />
                     <Text
+                        ref= {(el) => { this.cardNumberToken = el; }}
                         style={styles.tokenInfo}
                         numberOfLines={1}
-                        onChangeText = {this.showToken1}>
-                            {this.state.token1}
+                        onChangeText = {this.showCardNumberToken}>
+                            {this.state.cardNumberToken}
                     </Text>
                     <CardExpDateLayout
                         style={styles.collectField}
                         hint={'Expiration Date'}
                         fiendName={'expDate'}
                         corners={12}
-                        fontSize={10}
+                        fontSize={12}
                         padding={3}
                      />
                      <Text
+                         ref= {(el) => { this.expirationDateTokenValue = el; }}
                          style={styles.tokenInfo}
                          numberOfLines={1}
-                         onChangeText = {this.showToken1}>
-                         {this.state.token2}
+                         onChangeText = {this.showExpirationDateToken}>
+                         {this.state.expirationDateToken}
                      </Text>
 
                     <View style={{
@@ -105,7 +117,7 @@ export default class App extends  Component<Props> {
                     }}>
                         <Button style={styles.button}
                             title="Scan"
-                            onPress={this.handleClick}
+                            onPress={this.collectData}
                         />
                     </View>
 
@@ -125,34 +137,32 @@ export default class App extends  Component<Props> {
                       }} />
 
 
-                <View style={{ padding:3, width:'49%', height: '100%' }}>
-
-                    <Text
-                        style={styles.showField}
-                        numberOfLines={1}
-                        >
-                        Card Number
-                    </Text>
+                <View style={{ padding:3, width:'39%', height: '100%' }}>
 
                     <VGSTextView
-                        style={styles.collectField}
+                        style={styles.showField}
                         hint={'Card Number'}
                         contentPath={'json.payment_card_number'}
                         corners={12}
-                        fontSize={10}
+                        fontSize={12}
                         padding={3}
-                     />
+                    />
 
-                    <Text style={styles.showField} numberOfLines={1}>
-                        Expiration Date
-                    </Text>
+                    <VGSTextView
+                        style={styles.showField}
+                        hint={'Expiration Date'}
+                        contentPath={'json.payment_card_expiration_date'}
+                        corners={12}
+                        fontSize={12}
+                        padding={3}
+                    />
 
                     <View style={{
                         marginBottom:20, marginLeft:20, marginRight:20
                     }}>
-                        <Button style={styles.button}
+                        <Button style={styles.revealButton}
                             title="Reveal"
-                            onPress={this.handleClick}
+                            onPress={this.revealData}
                         />
                     </View>
 
@@ -174,125 +184,20 @@ var styles = StyleSheet.create({
   collectField: {
     width:'100%',
     height: 40,
-    marginBottom: 4
+    marginBottom: 3
   },
   showField: {
     width:'100%',
-    height: 40
+    height: 40,
+    marginTop: 12,
+    marginBottom: 20
   },
   button: {
     padding: 14,
     backgroundColor:'skyblue'
   },
-});
-
-/*
-type Props = {}
-export default class App extends Component<Props> {
-constructor(props) {
-    super(props);
-    this.listener = DeviceEventEmitter.addListener('onVGSResponse', e => this.showUserData(e));
-    this.listener = DeviceEventEmitter.addListener('onVGSStateChange', e => this.showUserData(e));
-    this.state = {
-      titleText: "Status:\n",
-      bodyText: "",
-    };
-  }
-
-     showUserData = (msg) => {
-         this.setState({ bodyText: msg })
-     }
-
-
-     handleClick = () => {
-         NumberVGSEditText.getFieldName(
-             (msg) => {
-                ScanActivity.setItem(msg, ScanActivity.CARD_NUMBER);
-             }
-         );
-
-         setTimeout(function(){
-              ScanActivity.startActivityForResult();
-         }, 200);
-     }
-
-    render() {
-
-        return (
-        <>
-            <View style={{flex: 1,flexDirection: 'row'}}>
-                <View style={styles.bodyContent }>
-                    <View style={styles.container} >
-                        <CardNumberLayout
-                            style={styles.field}
-                            hint={'Card Number'}
-                            corners={15}
-                            />
-                    </View>
-                    <View style={styles.container} >
-                        <CardExpDateLayout style={styles.field}
-                        />
-                    </View>
-                    <View style={styles.container} >
-                        <Button style={styles.button}
-                            title="Submit"
-                            onPress={() => VGSCollect.submitAsync()}
-                        />
-                    </View>
-                    <View style={styles.container} >
-                        <Button style={styles.button}
-                            title="Scan"
-                            onPress={this.handleClick}
-                        />
-                    </View>
-
-                </View>
-                <View style={styles.bodyResponse }>
-                    <Text style={styles.responseTitle}>
-                        {this.state.titleText}
-                    </Text>
-                    <Text style={styles.titleText}
-                        onPress={this.onPressTitle}
-                        onChangeText = {this.showUserData}>
-                       {this.state.bodyText}
-                    </Text>
-                </View>
-            </View>
-        </>
-        );
-    }
-};
-
-const styles = StyleSheet.create({
-  bodyContent: {
-      flex: 3,
-      justifyContent: 'flex-start',
-      flexDirection: 'column',
-      alignItems: 'stretch',
-      padding:16,
-  },
-
-  bodyResponse: {
-      flex: 2,
-      flexDirection: 'column',
-      marginTop:25,
-  },
-  container: {
-    height: 60,
-  },
-
-  field: {
-    height: 50,
-  },
-
-  responseTitle: {
-    fontWeight: 'bold',
-  },
-  button: {
-    marginTop:50,
-    marginBottom:50,
+  revealButton: {
+    padding: 14,
     backgroundColor:'skyblue'
   },
-
 });
-*/

@@ -2,6 +2,8 @@ package com.verygoodsecurity.reactnative.show.field;
 
 import android.util.TypedValue;
 
+import android.content.res.Resources;
+
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -41,7 +43,7 @@ public class TextViewManager extends ViewGroupManager<VGSTextView> {
 
     @ReactProp(name = "fontSize")
     public void setFontSize(VGSTextView view, int size) {
-        view.setTextSize(TypedValue.COMPLEX_UNIT_DIP, size);
+        view.setTextSize(size * Resources.getSystem().getDisplayMetrics().density);
     }
 
     @ReactProp(name = "hint")
@@ -52,6 +54,8 @@ public class TextViewManager extends ViewGroupManager<VGSTextView> {
     @Override
     protected VGSTextView createViewInstance(ThemedReactContext reactContext) {
         textView = new VGSTextView(reactContext);
+
+        listener.onCreateViewInstance(textView);
 
         return textView;
     }

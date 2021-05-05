@@ -1,8 +1,8 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'Awesome_Project' do
-  # Pods for Awesome_Project
+target 'VGS React Native Demo' do
+  # Pods for VGS React Native Demo
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -34,7 +34,7 @@ target 'Awesome_Project' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  target 'Awesome_ProjectTests' do
+  target 'VGS React Native DemoTests' do
     inherit! :search_paths
     # Pods for testing
   end
@@ -42,10 +42,10 @@ target 'Awesome_Project' do
   use_native_modules!
 end
 
-target 'Awesome_Project-tvOS' do
-  # Pods for Awesome_Project-tvOS
+target 'VGS React Native Demo-tvOS' do
+  # Pods for VGS React Native Demo-tvOS
 
-  target 'Awesome_Project-tvOSTests' do
+  target 'VGS React Native Demo-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

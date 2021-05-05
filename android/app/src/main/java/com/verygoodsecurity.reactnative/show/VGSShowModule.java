@@ -5,6 +5,9 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.ReadableMapKeySetIterator;
+import com.facebook.react.bridge.ReadableType;
 import android.app.Activity;
 import android.content.Intent;
 import java.util.HashMap;
@@ -42,20 +45,15 @@ public class VGSShowModule extends ReactContextBaseJavaModule {
 
         Activity activity = reactContext.getCurrentActivity();
 
-
         show = new VGSShow.Builder(activity, VAULT_ID)
             .setEnvironment(new VGSEnvironment.Sandbox())
             .build();
 
         initListeners();
     }
-//
-//    @ReactMethod
-//    public void init() {
-//
-//    }
 
-    public void bindView(VGSView view) {
+    public void subscribe(VGSView view) {
+        Log.e("test", "bindView "+view.getContentPath());
         show.subscribe(view);
     }
 
@@ -64,6 +62,7 @@ public class VGSShowModule extends ReactContextBaseJavaModule {
             @Override
             public void onResponse( VGSResponse response) {
 //                sendResponse(response);
+                Log.e("test", "submitAsync"+response.toString());
             }
         });
     }
@@ -74,13 +73,49 @@ public class VGSShowModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void submitAsync() {
-        Log.e("test", "submitAsync");
-//        Map<String, Object> payload = new HashMap<>();
-//
-//        show.requestAsync(PATH, VGSHttpMethod.POST, map);
+    public void submitAsync(ReadableMap rnMap) {
+        String key11 = rnMap.hasKey("payment_card_number") ? rnMap.getString("payment_card_number") : "empty";
+        String key12 = rnMap.hasKey("payment_card_expiration_date") ? rnMap.getString("payment_card_expiration_date") : "empty";
+        Log.e("test", "key1: "+key11);
+        Log.e("test", "key2: "+key12);
+
+        Map<String, Object> map = recursivelyDeconstructReadableMap(rnMap);
+        convertWithIteration(map);
+        show.requestAsync(PATH, VGSHttpMethod.POST, map);
     }
 
+    public void convertWithIteration(Map<String, ?> map) {
+        StringBuilder mapAsString = new StringBuilder();
+        for (String key : map.keySet()) {
+            mapAsString.append(key + "=" + map.get(key) + ", ");
+        }
+
+        Log.e("test", "map: "+mapAsString.toString());
+    }
+
+    private Map<String, Object> recursivelyDeconstructReadableMap(ReadableMap readableMap) {
+        ReadableMapKeySetIterator iterator = readableMap.keySetIterator();
+        Map<String, Object> deconstructedMap = new HashMap<>();
+        while (iterator.hasNextKey()) {
+            String key = iterator.nextKey();
+            ReadableType type = readableMap.getType(key);
+            switch (type) {
+                case Null:
+                    break;
+                case Boolean:
+                    deconstructedMap.put(key, readableMap.getBoolean(key));
+                    break;
+                case Number:
+                    deconstructedMap.put(key, readableMap.getDouble(key));
+                    break;
+                case String:
+                    deconstructedMap.put(key, readableMap.getString(key));
+                    break;
+            }
+
+        }
+        return deconstructedMap;
+    }
 
 //    private void sendResponse(VGSResponse response) {
 //        String responseStr = " ";
