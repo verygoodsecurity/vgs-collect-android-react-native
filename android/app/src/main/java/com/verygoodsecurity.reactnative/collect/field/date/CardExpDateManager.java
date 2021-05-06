@@ -80,8 +80,6 @@ public class CardExpDateManager extends ViewGroupManager<VGSTextInputLayout> {
         editText.setDateRegex("MM/yy");
         editText.setDatePickerMode(DatePickerMode.SPINNER);
 
-        editText.setText("12/37");
-
         vgsTextInputLayout.addView(editText);
 
         listener.onCreateViewInstance(editText);

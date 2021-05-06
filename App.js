@@ -70,7 +70,7 @@ export default class App extends  Component<Props> {
                 justifyContent:'center'
             }}>
                 <View style={{
-                    width:'60%', height: '100%', padding:3,
+                    width:'55%', height: '100%', padding:3,
                 }}>
                     <CardNumberLayout
                         style={styles.collectField}
@@ -137,7 +137,7 @@ export default class App extends  Component<Props> {
                       }} />
 
 
-                <View style={{ padding:3, width:'39%', height: '100%' }}>
+                <View style={{ padding:3, width:'44%', height: '100%' }}>
 
                     <VGSTextView
                         style={styles.showField}

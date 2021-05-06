@@ -85,8 +85,6 @@ public class CardNumberManager extends ViewGroupManager<VGSTextInputLayout> {
         editText.setDivider('-');
         editText.setCardBrandIconGravity(Gravity.END);
 
-        editText.setText("4111111111111111");
-
         vgsTextInputLayout.addView(editText);
 
         listener.onCreateViewInstance(editText);

@@ -1,6 +1,12 @@
-## VGS Collect SDK - React Native Demo
+# VGS Collect/Show SDK. React Native Demo.
 
-> **_NOTE:_**  This demo is just an example of how VGS Collect SDK can be integrated into your application. 
+<p align="center">
+    <img src="images/vgs-filled.png" width="200">
+    <img src="images/vgs-revealed.png" width="200">
+</p>
+
+> **_NOTE:_**  This demo is just an example of how VGS Collect SDK can be integrated into your application.
+
 
 ## How to run it?
 
